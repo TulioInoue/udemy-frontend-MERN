@@ -1,9 +1,10 @@
 import style from "./Login.module.css";
 
-import Input from "../../../components/input/Input";
+import SingleInput from "../../../components/inputs/singleInput/SingleInput";
 
 import { Link } from "react-router-dom";
 import { useState } from "react";
+import axios from "axios";
 
 function Login() {
   const [form, setForm] = useState({ email: "", password: "" });
@@ -18,6 +19,8 @@ function Login() {
 
   function onSubmit(e) {
     e.preventDefault();
+
+    axios.post(import.meta.env.VITE_BACKEND_URL);
   }
 
   return (
@@ -36,14 +39,14 @@ function Login() {
       <form className={style.login__form} onSubmit={(e) => onSubmit(e)}>
         <h2>Welcome</h2>
         <div className={style.login__form__inputs}>
-          <Input
+          <SingleInput
             icon="fi fi-br-at"
             id="email"
             label="Inform your email:"
             placeholder="user@email.com"
             onChangeFunction={(e) => updateForm("email", e)}
           />
-          <Input
+          <SingleInput
             icon="fi fi-br-lock"
             id="password"
             label="Inform your password:"

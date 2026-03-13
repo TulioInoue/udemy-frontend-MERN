@@ -14,7 +14,7 @@ function Home() {
         <span className={style.home__background_color}></span>
       </section>
       <section id={style.home__content}>
-        {path === "/home" ? <Hero /> : <Outlet />}
+        <Outlet />
       </section>
     </main>
   );
