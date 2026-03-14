@@ -15,6 +15,13 @@ html {
   font-family: "Inter", "Arial";
 }
 
+#alert-portal {
+  position: absolute;
+  align-self: center;
+  justify-self: center;
+  top: 10px;
+}
+
 #root {
   width: 100vw;
   height: 100dvh;

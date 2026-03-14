@@ -76,6 +76,10 @@
   padding: 1.5rem 0px;
 }
 
+.register__form__inputs_password span {
+  color: var(--failure-color);
+}
+
 .register__form__fotter {
   display: flex;
   height: 100%;

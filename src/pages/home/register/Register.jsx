@@ -2,12 +2,18 @@ import style from "./Register.module.css";
 
 import SingleInput from "../../../components/inputs/singleInput/SingleInput";
 import DualInput from "../../../components/inputs/dualInput/DualInput";
+import Alert from "../../../components/alert/Alert";
 
 import { Link } from "react-router-dom";
 import { useState } from "react";
 import axios from "axios";
 
 const Register = () => {
+  const [alert, setAlert] = useState({
+    isActive: false,
+    message: "",
+    type: "",
+  });
   const [form, setForm] = useState({
     firstName: "",
     lastName: "",
@@ -25,7 +31,7 @@ const Register = () => {
     });
 
     if (target === "password2") {
-      if (e.target.value !== form.password1 & e.target.value !== "") {
+      if ((e.target.value !== form.password1) & (e.target.value !== "")) {
         setIsMatchPassword(false);
       } else {
         setIsMatchPassword(true);
@@ -36,11 +42,46 @@ const Register = () => {
   function onSubmit(e) {
     e.preventDefault();
 
-    axios.post(import.meta.env.VITE_BACKEND_URL);
+    const formObject = {
+      firstName: form.firstName,
+      lastName: form.lastName,
+      email: form.email,
+      password: form.password1,
+    };
+
+    if (form.password1 !== form.password2) {
+      setAlert({
+        isActive: true,
+        message: "Passwords do not match",
+        type: "error",
+      });
+      return;
+    }
+
+    axios
+      .post(`${import.meta.env.VITE_BACKEND_URL}/users/create`, formObject)
+      .then((response) => {
+        console.log(response);
+        setAlert({
+          isActive: true,
+          message: response.data.message,
+          type: response.data.type,
+        });
+      })
+      .catch((_) => {
+        setAlert({
+          isActive: true,
+          message: "Could not create user",
+          type: "failure",
+        });
+      });
   }
 
   return (
     <section id={style.register}>
+      {alert.isActive === true ? (
+        <Alert alert={alert} setAlert={setAlert} />
+      ) : null}
       <aside className={style.register__aside}>
         <img src="/public/magic-book.png" alt="rememorize logo" />
         <span>Rememorize</span>
@@ -72,18 +113,20 @@ const Register = () => {
             placeholder="user@email.com"
             onChangeFunction={(e) => updateForm("email", e)}
           />
-          <DualInput
-            icon="fi fi-br-lock"
-            id1="password1"
-            id2="password2"
-            label="Create your password:"
-            placeholder1="password"
-            placeholder2="confirm password"
-            onChangeFunction1={(e) => updateForm("password1", e)}
-            onChangeFunction2={(e) => updateForm("password2", e)}
-          />
+          <div className={style.register__form__inputs_password}>
+            <DualInput
+              icon="fi fi-br-lock"
+              id1="password1"
+              id2="password2"
+              label="Create your password:"
+              placeholder1="password"
+              placeholder2="confirm password"
+              onChangeFunction1={(e) => updateForm("password1", e)}
+              onChangeFunction2={(e) => updateForm("password2", e)}
+            />
+            {isMatchPassword || <span>Passwords do not match.</span>}
+          </div>
         </div>
-        <div>{isMatchPassword || <p>Passwords do not match.</p>}</div>
         <div className={style.register__form__fotter}>
           <button type="submit">register</button>
           <button type="reset">reset</button>
