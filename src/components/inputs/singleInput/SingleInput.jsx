@@ -1,6 +1,6 @@
 import style from "./SingleInput.module.css";
 
-function SingleInput({ icon, label, placeholder, id, onChangeFunction }) {
+function SingleInput({ icon, label, type, placeholder, id, onChangeFunction }) {
   return (
     <div className={style.input}>
       <label htmlFor={id} className={style.input__label}>
@@ -10,7 +10,7 @@ function SingleInput({ icon, label, placeholder, id, onChangeFunction }) {
         <i className={icon} />
         <input
           id={id}
-          type="text"
+          type={type}
           placeholder={placeholder}
           onChange={(e) => onChangeFunction(e)}
         />

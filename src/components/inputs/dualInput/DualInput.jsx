@@ -3,6 +3,8 @@ import style from "./DualInput.module.css";
 function DualInput({
   icon,
   label,
+  type1,
+  type2,
   placeholder1,
   placeholder2,
   id1,
@@ -20,14 +22,14 @@ function DualInput({
         <input
           className={style.input__content_first}
           id={id1}
-          type="text"
+          type={type1}
           placeholder={placeholder1}
           onChange={(e) => onChangeFunction1(e)}
         />
         <input
           className={style.input__content_second}
           id={id2}
-          type="text"
+          type={type2}
           placeholder={placeholder2}
           onChange={(e) => onChangeFunction2(e)}
         />

@@ -119,6 +119,8 @@ const Register = () => {
               id1="password1"
               id2="password2"
               label="Create your password:"
+              type1="password"
+              type2="password"
               placeholder1="password"
               placeholder2="confirm password"
               onChangeFunction1={(e) => updateForm("password1", e)}
