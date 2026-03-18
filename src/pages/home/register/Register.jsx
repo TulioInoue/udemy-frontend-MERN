@@ -68,7 +68,7 @@ const Register = () => {
           type: response.data.type,
         });
       })
-      .catch((_) => {
+      .catch(() => {
         setAlert({
           isActive: true,
           message: "Could not create user",

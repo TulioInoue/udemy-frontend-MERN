@@ -1,0 +1,15 @@
+#navbar {
+  display: flex;
+  width: 100%;
+  height: max-content;
+  background-color: var(--primary-color);
+  align-items: center;
+  justify-content: space-around;
+}
+
+#navbar a {
+  padding: 1rem;
+  font-size: 2rem;
+  text-decoration: none;
+  color: var(--white-color);
+}

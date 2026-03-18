@@ -31,6 +31,7 @@ function Login() {
       .post(`${import.meta.env.VITE_BACKEND_URL}/users/login`, form)
       .then((response) => {
         localStorage.setItem("token", response.data.token);
+        navigate("/main/my-posts");
       })
       .catch(() =>
         setAlert({
